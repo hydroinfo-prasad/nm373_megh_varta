@@ -89,13 +89,6 @@ def Preprocessed_additional_data(X,time,date,month,images_path,normalization_typ
             
             y=X[i+window_size:i+window_size+pred_frame]
             
-            '''
-            if output=='norm':
-                y=normalised_X[i+window_size:i+window_size+pred_frame]
-            else:
-                y=X[i+window_size:i+window_size+pred_frame]
-            '''
-            
             #print(i)
             tir_x.append(x)
             tir_y.append(y)
