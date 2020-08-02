@@ -57,48 +57,9 @@ def Load_additional_data(path,start_img_path, end_img_path):
 def Preprocessed_additional_data(X,time,date,month,images_path,normalization_type='scaling',inp_seq_len=3,pred_frame=1,normalized_output='no',Validation_split=None):
     
     #print(mean,std_dev)
-    window_size=inp_seq_len  #10
-    
-    '''
-    if(Validation_split!=None):
-        num_sq = len(X)-window_size
-        #print(num_inp)
-        ind = int(num_sq*(1-Validation_split))
-        if ind!=0:
-            mean, std_dev = (X[:ind+window_size]).mean(),(X[:ind+window_size]).std()
-            
-        else:
-            mean, std_dev = X.mean(),X.std()
-            print('dataset is too small for validation set')
-            
-    else:
-        mean, std_dev = X.mean(),X.std()
-
-    Max,Min= np.max(X),np.min(X)
-    '''
-    '''
-    print('normalizing images')
-   
-    i=0
-    normalised_X=[]
-    for img in X:
-        if normalization_type=='scaling':
-            norm= ((img-Min)/(Max-Min))
-        if normalization_type=='zscore':
-            norm = ((img - mean)/std_dev)
-        normalised_X.append(norm)
-        if i%50==0:
-            if i>0:
-                print(i,"images out of", len(X), "are normalized")
-        i=i+1
-     
-    '''        
+    window_size=inp_seq_len  #10      
     
     print('making images sequences with length:', window_size)
-    
-   
-    
-    
     verify=[]
     tir_x=[]
     tir_y=[]
