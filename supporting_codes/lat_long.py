@@ -5,7 +5,6 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import sys
 
-
 #function to fetch lat and long given city name
 def get_location(city):
     arr = {}
@@ -25,13 +24,14 @@ def cords_to_pixel(lon, lat):
 #     return ( ys,xs)
 
 
-img = Image.open("CMK_Cropped_16.tif")
+img = Image.open("CMK_pred.png")
 ar = np.array(img)
 
 #city -> location
 city_name=sys.argv[1]
 location = get_location(city_name)
 
+#lon, lat -> pixels
 #lon, lat -> pixels
 pixel_cord = cords_to_pixel(location['lon'], location['lat'])
 mask = ar[int(pixel_cord[0]), int(pixel_cord[1])]
@@ -44,17 +44,17 @@ else:
     mask_str = "Cloudy"
 
 #display
-
 fig2 = plt.figure(figsize = (20,20))
 ax3 = fig2.add_subplot(111)
-x_label = "City: "+ location['city'].split(",")[0] + ",  Lat: " +str(round(location['lat'],3)) + ",  Long: " + str(round(location['lon'],3))
+x_label = "8 July 00:00 "", City: "+ location['city'].split(",")[0] + ",  Latt: " +str(round(location['lat'],3)) + ",  Long: " + str(round(location['lon'],3))
 ax3.set_xlabel(x_label, fontsize=40, style="italic")
+
 # Turn off tick labels
 ax3.set_yticklabels([])
 ax3.set_xticklabels([])
-
+#ax3.imshow(ar1[:,:,1], cmap='gray')
 ax3.imshow(ar, cmap='gray')
 ax3.annotate(' ', xy=pixel_cord, xycoords='data',
              backgroundcolor='red',fontsize=13)
-ax3.set_title(" Status : " + mask_str,fontsize=40, fontweight="bold")
-plt.savefig("cords.jpg")
+ax3.set_title(" Status : " + mask_str,fontsize=35, fontweight="bold")
+plt.savefig("cords.jpg",bbox_inches='tight')
