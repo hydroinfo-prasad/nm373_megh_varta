@@ -47,8 +47,14 @@ else:
 
 fig2 = plt.figure(figsize = (20,20))
 ax3 = fig2.add_subplot(111)
+x_label = "City: "+ location['city'].split(",")[0] + ",  Lat: " +str(round(location['lat'],3)) + ",  Long: " + str(round(location['lon'],3))
+ax3.set_xlabel(x_label, fontsize=40, style="italic")
+# Turn off tick labels
+ax3.set_yticklabels([])
+ax3.set_xticklabels([])
+
 ax3.imshow(ar, cmap='gray')
 ax3.annotate(' ', xy=pixel_cord, xycoords='data',
              backgroundcolor='red',fontsize=13)
-ax3.set_title("City: "+city_name+", Status : " + mask_str,fontsize=40)
+ax3.set_title(" Status : " + mask_str,fontsize=40, fontweight="bold")
 plt.savefig("cords.jpg")
